@@ -37,7 +37,7 @@ namespace Day1Homework.Tests
 
             //accsert
             acture.Should().NotBeEmpty()
-                 .And.HaveCount(2)
+                 .And.HaveCount(expected.Count)
                  .And.ContainInOrder(expected)
                  .And.ContainItemsAssignableTo<int>();
         }
@@ -56,7 +56,7 @@ namespace Day1Homework.Tests
 
             //accsert
             acture.Should().NotBeEmpty()
-                 .And.HaveCount(2)
+                 .And.HaveCount(expected.Count)
                  .And.ContainInOrder(expected)
                  .And.ContainItemsAssignableTo<int>();
         }
@@ -75,7 +75,7 @@ namespace Day1Homework.Tests
 
             //accsert
             acture.Should().NotBeEmpty()
-                 .And.HaveCount(3)
+                 .And.HaveCount(expected.Count)
                  .And.ContainInOrder(expected)
                  .And.ContainItemsAssignableTo<int>();
         }
@@ -94,7 +94,7 @@ namespace Day1Homework.Tests
 
             //accsert
             acture.Should().NotBeEmpty()
-                 .And.HaveCount(2)
+                 .And.HaveCount(expected.Count)
                  .And.ContainInOrder(expected)
                  .And.ContainItemsAssignableTo<int>();
         }
@@ -114,7 +114,7 @@ namespace Day1Homework.Tests
 
             //accsert
             acture.Should().NotBeEmpty()
-                 .And.HaveCount(2)
+                 .And.HaveCount(expected.Count)
                  .And.ContainInOrder(expected)
                  .And.ContainItemsAssignableTo<int>();
         }
@@ -134,7 +134,27 @@ namespace Day1Homework.Tests
 
             //accsert
             acture.Should().NotBeEmpty()
-                 .And.HaveCount(2)
+                 .And.HaveCount(expected.Count)
+                 .And.ContainInOrder(expected)
+                 .And.ContainItemsAssignableTo<int>();
+        }
+
+        [TestMethod()]
+        public void GetDynamicSumTest_recordCount_2_columnName_SellPrice_should_listcount_3_should_listcontent_300_700_500()
+        {
+            //arrange
+            var recordCount = 2;
+            var columnName = "SellPrice";
+            var expected = new List<int>() { 300, 700, 500 };
+
+            //act
+            var act = new StubCountService();
+            act.SetMemberList(testMemberList);
+            var acture = act.GetDynamicSum(recordCount, columnName);
+
+            //accsert
+            acture.Should().NotBeEmpty()
+                 .And.HaveCount(expected.Count)
                  .And.ContainInOrder(expected)
                  .And.ContainItemsAssignableTo<int>();
         }

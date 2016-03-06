@@ -9,22 +9,29 @@ namespace Day1Homework
     {
         internal List<int> GetCostSum(int recordCount)
         {
-            var memberList = GetMemberDataList();
-
-            var data = memberList.Select((member, index) => new { member, index })
-                        .GroupBy(x => x.index / recordCount, i => i.member)
-                        .Select(x => x.Sum(y => y.Cost)).ToList();
-
-            return data;
+            return this.GetDynamicSum(recordCount, "Cost");
         }
 
         internal List<int> GetRevenueSum(int recordCount)
         {
+            return this.GetDynamicSum(recordCount, "Revenue");
+        }
+
+        internal List<int> GetDynamicSum(int recordCount, string columnName)
+        {
             var memberList = GetMemberDataList();
+
+            bool propExists = typeof(MemberModel).GetProperties()
+                            .Where(x => x.Name == columnName)
+                            .Any();
+
+            if (!propExists)
+                throw new ArgumentException();
 
             var data = memberList.Select((member, index) => new { member, index })
                         .GroupBy(x => x.index / recordCount, i => i.member)
-                        .Select(x => x.Sum(y => y.Revenue)).ToList();
+                        .Select(x => x.Sum(y => (int)y.GetType().GetProperty(columnName).GetValue(y)))
+                        .ToList();
 
             return data;
         }

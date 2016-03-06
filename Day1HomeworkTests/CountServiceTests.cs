@@ -36,7 +36,10 @@ namespace Day1Homework.Tests
             var acture = act.GetCostSum(recordCount);
 
             //accsert
-            expected.Should().ContainInOrder(expected);
+            acture.Should().NotBeEmpty()
+                 .And.HaveCount(2)
+                 .And.ContainInOrder(expected)
+                 .And.ContainItemsAssignableTo<int>();
         }
 
         [TestMethod()]
@@ -52,7 +55,10 @@ namespace Day1Homework.Tests
             var acture = act.GetCostSum(recordCount);
 
             //accsert
-            expected.Should().ContainInOrder(expected);
+            acture.Should().NotBeEmpty()
+                 .And.HaveCount(2)
+                 .And.ContainInOrder(expected)
+                 .And.ContainItemsAssignableTo<int>();
         }
 
         [TestMethod()]
@@ -68,14 +74,17 @@ namespace Day1Homework.Tests
             var acture = act.GetRevenueSum(recordCount);
 
             //accsert
-            expected.Should().ContainInOrder(expected);
+            acture.Should().NotBeEmpty()
+                 .And.HaveCount(3)
+                 .And.ContainInOrder(expected)
+                 .And.ContainItemsAssignableTo<int>();
         }
 
         [TestMethod()]
         public void GetRevenueSumTest_recordCount_4_should_listcount_2_should_listcontent_100_50()
         {
             //arrange
-            var recordCount = 2;
+            var recordCount = 4;
             var expected = new List<int>() { 100, 50 };
 
             //act
@@ -84,7 +93,67 @@ namespace Day1Homework.Tests
             var acture = act.GetRevenueSum(recordCount);
 
             //accsert
-            expected.Should().ContainInOrder(expected);
+            acture.Should().NotBeEmpty()
+                 .And.HaveCount(2)
+                 .And.ContainInOrder(expected)
+                 .And.ContainItemsAssignableTo<int>();
+        }
+
+        [TestMethod()]
+        public void GetDynamicSumTest_recordCount_4_columnName_Revenue_should_listcount_2_should_listcontent_100_50()
+        {
+            //arrange
+            var recordCount = 4;
+            var columnName = "Revenue";
+            var expected = new List<int>() { 100, 50 };
+
+            //act
+            var act = new StubCountService();
+            act.SetMemberList(testMemberList);
+            var acture = act.GetDynamicSum(recordCount, columnName);
+
+            //accsert
+            acture.Should().NotBeEmpty()
+                 .And.HaveCount(2)
+                 .And.ContainInOrder(expected)
+                 .And.ContainItemsAssignableTo<int>();
+        }
+
+        [TestMethod()]
+        public void GetDynamicSumTest_recordCount_3_columnName_Cost_should_listcount_2_should_listcontent_6_9()
+        {
+            //arrange
+            var recordCount = 3;
+            var columnName = "Cost";
+            var expected = new List<int>() { 6, 9 };
+
+            //act
+            var act = new StubCountService();
+            act.SetMemberList(testMemberList);
+            var acture = act.GetDynamicSum(recordCount, columnName);
+
+            //accsert
+            acture.Should().NotBeEmpty()
+                 .And.HaveCount(2)
+                 .And.ContainInOrder(expected)
+                 .And.ContainItemsAssignableTo<int>();
+        }
+
+        [TestMethod()]
+        public void GetDynamicSumTest_recordCount_4_columnName_fakeColumn_should_ArgumentException()
+        {
+            //arrange
+            var recordCount = 4;
+            var columnName = "fakeColumn";
+            var expected = new List<int>() { 100, 50 };
+
+            //act
+            var act = new StubCountService();
+            act.SetMemberList(testMemberList);
+            Action acture = () => act.GetDynamicSum(recordCount, columnName);
+
+            //assert
+            acture.ShouldThrow<ArgumentException>();
         }
     }
 

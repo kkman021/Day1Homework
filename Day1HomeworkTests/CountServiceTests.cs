@@ -16,19 +16,25 @@ namespace Day1Homework.Tests
         {
             testMemberList = new List<MemberModel>();
 
-            testMemberList.Add(new MemberModel() { Id = 1, Cost = 1, Revenue = 10, SellPrice = 100 });
-            testMemberList.Add(new MemberModel() { Id = 2, Cost = 2, Revenue = 20, SellPrice = 200 });
-            testMemberList.Add(new MemberModel() { Id = 3, Cost = 3, Revenue = 30, SellPrice = 300 });
-            testMemberList.Add(new MemberModel() { Id = 4, Cost = 4, Revenue = 40, SellPrice = 400 });
-            testMemberList.Add(new MemberModel() { Id = 5, Cost = 5, Revenue = 50, SellPrice = 500 });
+            testMemberList.Add(new MemberModel() { Id = 1, Cost = 1, Revenue = 11, SellPrice = 21 });
+            testMemberList.Add(new MemberModel() { Id = 2, Cost = 2, Revenue = 12, SellPrice = 22 });
+            testMemberList.Add(new MemberModel() { Id = 3, Cost = 3, Revenue = 13, SellPrice = 23 });
+            testMemberList.Add(new MemberModel() { Id = 4, Cost = 4, Revenue = 14, SellPrice = 24 });
+            testMemberList.Add(new MemberModel() { Id = 5, Cost = 5, Revenue = 15, SellPrice = 25 });
+            testMemberList.Add(new MemberModel() { Id = 6, Cost = 6, Revenue = 16, SellPrice = 26 });
+            testMemberList.Add(new MemberModel() { Id = 7, Cost = 7, Revenue = 17, SellPrice = 27 });
+            testMemberList.Add(new MemberModel() { Id = 8, Cost = 8, Revenue = 18, SellPrice = 28 });
+            testMemberList.Add(new MemberModel() { Id = 9, Cost = 9, Revenue = 19, SellPrice = 29 });
+            testMemberList.Add(new MemberModel() { Id = 10, Cost = 10, Revenue = 20, SellPrice = 30 });
+            testMemberList.Add(new MemberModel() { Id = 11, Cost = 11, Revenue = 21, SellPrice = 31 });
         }
 
         [TestMethod()]
-        public void GetCostSumTest_recordCount_3_should_listcount_2_should_listcontent_6_9()
+        public void GetCostSumTest_recordCount_3_should_listcount_4_should_listcontent_6_15_24_21()
         {
             //arrange
             var recordCount = 3;
-            var expected = new List<int>() { 6, 9 };
+            var expected = new List<int>() { 6, 15, 24, 21 };
 
             //act
             var act = new StubCountService();
@@ -43,30 +49,11 @@ namespace Day1Homework.Tests
         }
 
         [TestMethod()]
-        public void GetCostSumTest_recordCount_4_should_listcount_2_should_listcontent_10_5()
+        public void GetRevenueSumTest_recordCount_4_should_listcount_3_should_listcontent_50_66_60()
         {
             //arrange
             var recordCount = 4;
-            var expected = new List<int>() { 10, 5 };
-
-            //act
-            var act = new StubCountService();
-            act.SetMemberList(testMemberList);
-            var acture = act.GetCostSum(recordCount);
-
-            //accsert
-            acture.Should().NotBeEmpty()
-                 .And.HaveCount(expected.Count)
-                 .And.ContainInOrder(expected)
-                 .And.ContainItemsAssignableTo<int>();
-        }
-
-        [TestMethod()]
-        public void GetRevenueSumTest_recordCount_2_should_listcount_3_should_listcontent_30_70_50()
-        {
-            //arrange
-            var recordCount = 2;
-            var expected = new List<int>() { 30, 70, 50 };
+            var expected = new List<int>() { 50, 66, 60 };
 
             //act
             var act = new StubCountService();
@@ -78,102 +65,6 @@ namespace Day1Homework.Tests
                  .And.HaveCount(expected.Count)
                  .And.ContainInOrder(expected)
                  .And.ContainItemsAssignableTo<int>();
-        }
-
-        [TestMethod()]
-        public void GetRevenueSumTest_recordCount_4_should_listcount_2_should_listcontent_100_50()
-        {
-            //arrange
-            var recordCount = 4;
-            var expected = new List<int>() { 100, 50 };
-
-            //act
-            var act = new StubCountService();
-            act.SetMemberList(testMemberList);
-            var acture = act.GetRevenueSum(recordCount);
-
-            //accsert
-            acture.Should().NotBeEmpty()
-                 .And.HaveCount(expected.Count)
-                 .And.ContainInOrder(expected)
-                 .And.ContainItemsAssignableTo<int>();
-        }
-
-        [TestMethod()]
-        public void GetDynamicSumTest_recordCount_4_columnName_Revenue_should_listcount_2_should_listcontent_100_50()
-        {
-            //arrange
-            var recordCount = 4;
-            var columnName = "Revenue";
-            var expected = new List<int>() { 100, 50 };
-
-            //act
-            var act = new StubCountService();
-            act.SetMemberList(testMemberList);
-            var acture = act.GetDynamicSum(recordCount, columnName);
-
-            //accsert
-            acture.Should().NotBeEmpty()
-                 .And.HaveCount(expected.Count)
-                 .And.ContainInOrder(expected)
-                 .And.ContainItemsAssignableTo<int>();
-        }
-
-        [TestMethod()]
-        public void GetDynamicSumTest_recordCount_3_columnName_Cost_should_listcount_2_should_listcontent_6_9()
-        {
-            //arrange
-            var recordCount = 3;
-            var columnName = "Cost";
-            var expected = new List<int>() { 6, 9 };
-
-            //act
-            var act = new StubCountService();
-            act.SetMemberList(testMemberList);
-            var acture = act.GetDynamicSum(recordCount, columnName);
-
-            //accsert
-            acture.Should().NotBeEmpty()
-                 .And.HaveCount(expected.Count)
-                 .And.ContainInOrder(expected)
-                 .And.ContainItemsAssignableTo<int>();
-        }
-
-        [TestMethod()]
-        public void GetDynamicSumTest_recordCount_2_columnName_SellPrice_should_listcount_3_should_listcontent_300_700_500()
-        {
-            //arrange
-            var recordCount = 2;
-            var columnName = "SellPrice";
-            var expected = new List<int>() { 300, 700, 500 };
-
-            //act
-            var act = new StubCountService();
-            act.SetMemberList(testMemberList);
-            var acture = act.GetDynamicSum(recordCount, columnName);
-
-            //accsert
-            acture.Should().NotBeEmpty()
-                 .And.HaveCount(expected.Count)
-                 .And.ContainInOrder(expected)
-                 .And.ContainItemsAssignableTo<int>();
-        }
-
-        [TestMethod()]
-        public void GetDynamicSumTest_recordCount_4_columnName_fakeColumn_should_ArgumentException()
-        {
-            //arrange
-            var recordCount = 4;
-            var columnName = "fakeColumn";
-            var expected = new List<int>() { 100, 50 };
-
-            //act
-            var act = new StubCountService();
-            act.SetMemberList(testMemberList);
-            Action acture = () => act.GetDynamicSum(recordCount, columnName);
-
-            //assert
-            acture.ShouldThrow<ArgumentException>();
         }
     }
 

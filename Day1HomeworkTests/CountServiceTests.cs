@@ -34,12 +34,13 @@ namespace Day1Homework.Tests
         {
             //arrange
             var recordCount = 3;
+            var columnName = "Cost";
             var expected = new List<int>() { 6, 15, 24, 21 };
 
             //act
             var act = new StubCountService();
             act.SetMemberList(testMemberList);
-            var acture = act.GetCostSum(recordCount);
+            var acture = act.GetDynamicSum(recordCount, columnName);
 
             //accsert
             acture.Should().NotBeEmpty()
@@ -53,12 +54,14 @@ namespace Day1Homework.Tests
         {
             //arrange
             var recordCount = 4;
+            var columnName = "Revenue";
+
             var expected = new List<int>() { 50, 66, 60 };
 
             //act
             var act = new StubCountService();
             act.SetMemberList(testMemberList);
-            var acture = act.GetRevenueSum(recordCount);
+            var acture = act.GetDynamicSum(recordCount, columnName);
 
             //accsert
             acture.Should().NotBeEmpty()
